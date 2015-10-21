@@ -16,5 +16,6 @@ import dagger.Component;
 public interface Level2ExtendComponent extends Level2Component {
 
     void inject(Level2Activity level2Activity);
-    void inject (Level3Fragment level3Fragment);
+
+    void inject(Level2ActivityCopy level2ActivityCopy);
 }

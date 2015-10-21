@@ -1,16 +1,14 @@
 package com.example.paveljacko.dagger2test;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.paveljacko.library.Level1Application;
 import com.example.paveljacko.library.Level1Class;
@@ -19,7 +17,7 @@ import com.example.paveljacko.library.Level2Module;
 
 import javax.inject.Inject;
 
-public class Level2Activity extends AppCompatActivity {
+public class Level2ActivityCopy extends AppCompatActivity {
 
     @Inject
     Level1Class level1Class;
@@ -28,7 +26,7 @@ public class Level2Activity extends AppCompatActivity {
 
     private Level2ExtendComponent level2ExtendComponent;
 
-    public Level2Activity() {
+    public Level2ActivityCopy() {
         Log.d("LIFECYCLE", getClass().getSimpleName() + " Created");
     }
 
@@ -49,14 +47,12 @@ public class Level2Activity extends AppCompatActivity {
         level2ExtendComponent.inject(this);
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Level2Activity.this, Level2Activity.class));
+                startActivity(new Intent(Level2ActivityCopy.this, Level2ActivityCopy.class));
             }
         });
 
@@ -82,8 +78,7 @@ public class Level2Activity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            Intent intent = new Intent(this, Level2ActivityCopy.class);
-            startActivity(intent);
+            Intent intent = new Intent("");
 
             return true;
         }

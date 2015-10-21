@@ -20,9 +20,9 @@ public class Level1Module {
         this.level1Application = avengersApplication;
     }
 
-    @Provides @Level1Scope
+    @Provides @Singleton
     Level1Application level1Application () { return level1Application; }
 
-    @Provides @Level1Scope
+    @Provides @Singleton
     Level1Class level1Class () { return new Level1Class(); }
 }

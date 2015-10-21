@@ -7,7 +7,7 @@ import dagger.Component;
  */
 @Level2Scope
 @Component(dependencies = Level1Component.class, modules = Level2Module.class)
-public interface Level2Component {
+public interface Level2Component  extends Level1Component{
 
     //void inject (Level2Activity level2Activity);
     //void inject (Level3Fragment level3Fragment);

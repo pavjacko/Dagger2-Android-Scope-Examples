@@ -1,15 +1,18 @@
 package com.example.paveljacko.dagger2test;
 
-import android.support.v4.app.Fragment;
+import android.app.Activity;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.paveljacko.library.DaggerLevel3Component;
 import com.example.paveljacko.library.Level1Application;
 import com.example.paveljacko.library.Level1Class;
 import com.example.paveljacko.library.Level2Class;
+import com.example.paveljacko.library.Level2Module;
 import com.example.paveljacko.library.Level3Class;
 import com.example.paveljacko.library.Level3Module;
 import com.example.paveljacko.library.Level4Class;
@@ -31,6 +34,10 @@ public class Level3Fragment extends Fragment {
     @Inject
     Level4Class level4Class;
 
+
+    private Level3ExtendComponent level3ExtendComponent;
+
+
     public Level3Fragment() {
         Log.d("LIFECYCLE", getClass().getSimpleName() + " Created");
     }
@@ -39,14 +46,27 @@ public class Level3Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        Level2Activity level2Activity = (Level2Activity) getActivity();
-        Level1Application level1Application = (Level1Application) getActivity().getApplication();
-        level2Activity.level2ExtendComponent().inject(this);
 
-        /*DaggerLevel3Component.builder()
-                .level2Component(level2Activity.level2ExtendComponent())
-                .level3Module(new Level3Module()).build().inject(this);
-        Level5Class level5Class = new Level5Class();*/
+        Level2ExtendComponent component = null;
+        if(getActivity() instanceof Level2Activity) {
+            Level2Activity activity = (Level2Activity) getActivity();
+            component = activity.level2ExtendComponent();
+        } else {
+            Level2ActivityCopy activity = (Level2ActivityCopy) getActivity();
+            component = activity.level2ExtendComponent();
+        }
+
+        Level1Application level1Application = (Level1Application) getActivity().getApplication();
+
+
+
+        level3ExtendComponent = DaggerLevel3ExtendComponent.builder()
+                .level2Component(component)
+                .level3Module(new Level3Module())
+                .build();
+
+
+        level3ExtendComponent.inject(this);
         //inje
 
         Log.d("BUM", getClass().getSimpleName() + " try access: " + level1Class);
